@@ -23,4 +23,43 @@ const map = new Map({
   },
   center: [139.73, 35.56],
   zoom: 12,
-})
+});
+
+// ポリゴンデータを表示する
+map.on('load', function () {
+  map.addSource('ku', {
+      type: 'geojson',
+      data: './data/N03-23_13_230101.geojson',
+  });
+  map.addSource('machi', {
+    type: 'geojson',
+    data: './data/h27ka13111.json',
+  });
+  map.addLayer({
+      id: 'ku',
+      type: 'line',
+      source: 'ku',
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      paint: {
+          'line-color': '#297bb2',
+          'line-width': 5,
+      },
+  });
+  map.addLayer({
+    id: 'machi',
+    type: 'line',
+    source: 'machi',
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round',
+    },
+    paint: {
+        'line-color': '#000000',
+        'line-width': 1,
+    },
+  });
+});
+
